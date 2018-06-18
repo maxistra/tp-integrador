@@ -2,9 +2,12 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+// ionic-native
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+
+
+
 
 @Component({
   templateUrl: 'app.html'
@@ -12,19 +15,36 @@ import { ListPage } from '../pages/list/list';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  private localStorage: Storage;
+  public fotoPerfil: any;
+  rootPage: any;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: any, icon: string}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
-    this.initializeApp();
-
-    // used for an example of ngFor and navigation
+  constructor(public platform: Platform, 
+    public statusBar: StatusBar, 
+    public splashScreen: SplashScreen,
+    private camera: Camera,
+  ) {
+    this.localStorage = window.localStorage;
+    this.pages;
+    
+    let isLogged = this.localStorage.getItem('autentico');
+    if (isLogged) {
+      this.rootPage = 'home';
+    }
+    else {
+      this.rootPage = 'login';
+    }
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
+      { title: 'Inicio', component: 'home', icon: 'home' },
+      { title: 'Favoritos', component: 'favoritos', icon: 'star' },
+      { title: 'Galeria', component: 'galeria',  icon: 'images' },
+      { title: 'Perfil', component: 'perfil', icon: 'contact' },
+      //{ title: 'Configurar', component: 'config', icon: 'construct' },
     ];
-
+    this.initializeApp();
+    
   }
 
   initializeApp() {
@@ -40,5 +60,29 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  logOut(){
+    this.localStorage.removeItem('autentico');
+    this.nav.setRoot('login');
+  }
+  abrirGaleria(): void {
+    let options: CameraOptions = {
+      quality: 100,
+      correctOrientation: true,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64:
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.fotoPerfil = base64Image;
+    }, (err) => {
+      // Handle error
+    });
   }
 }

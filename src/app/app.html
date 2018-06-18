@@ -6,13 +6,23 @@
   </ion-header>
 
   <ion-content>
-    <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+    <ion-list *ngFor="let p of pages">
+      <button menuClose ion-item (click)="openPage(p)" *ngIf="p.title !== 'Galeria'">
+        <ion-icon name="{{p.icon}}" right></ion-icon>
+        {{p.title}}
+      </button>
+      <button menuClose ion-item (click)="abrirGaleria()" *ngIf="p.title == 'Galeria'" >
+        <ion-icon name="{{p.icon}}" right></ion-icon>
         {{p.title}}
       </button>
     </ion-list>
   </ion-content>
 
+  <ion-footer>
+     <ion-navbar >
+      <button menuClose ion-button full (click)="logOut()">salir</button>
+    </ion-navbar>
+  </ion-footer>
 </ion-menu>
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->

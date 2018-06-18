@@ -1,0 +1,41 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons left>
+        <button ion-button color="primary" (click)="cerrarModal(false);">Cerrer</button>
+      </ion-buttons>
+      <ion-title>Info de Peliculas</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  
+  <ion-content padding>
+    <ion-grid>
+      <ion-row justify-content-end>
+        <ion-col align-self-center>
+          <div margin-horizontal>
+            <img [src]="infoPeliculasData.Poster">
+          </div>
+        </ion-col>
+        <ion-col col-12 col-sm>
+          <b>{{infoPeliculasData.titulo}}</b>
+          <div text-capitalize>
+            <br>
+            primera letra en mayusculas
+            text-capitalize
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac vehicula lorem.
+            <br><br>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac vehicula lorem.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac vehicula lorem.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac vehicula lorem.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac vehicula lorem.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac vehicula lorem.
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+  </ion-content>
+  <ion-footer>
+    <button ion-button color="primary" (click)="cerrarModal(true);">Volver</button>
+  </ion-footer>
+  

@@ -1,0 +1,32 @@
+<ion-content padding>
+<ion-row>
+  <ion-col text-center col-12 col-md-6 offset-md-3>
+    <img src="assets/imgs/logo.png" alt="Logo">
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col col-12 col-md-6 offset-md-3>
+    <ion-list no-lines center>
+      <ion-item>
+        <ion-label color="primary" stacked>Usuario</ion-label>
+        <ion-input placeholder="ingrese su Usuario"   [(ngModel)]="datosLogin.username" clearInput></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label color="secondary" floating>Password</ion-label>
+          <ion-input [(ngModel)]="datosLogin.password" clearInput="true" type="password"></ion-input>
+      </ion-item>
+      <button ion-button color="primary" outline block margin-top (click)="login()">Iniciar Sesion</button>
+      <ion-row text-center>
+        <ion-col center>
+          <button title="olvido contraseña?" (click)="contrasena()" ion-button icon-only margin-top center round>
+            <ion-icon name="help"></ion-icon>
+          </button>
+          <button title="Registarse" (click)="Registarse()" ion-button icon-only margin-top center round>
+            <ion-icon name="contact"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+  </ion-col>
+</ion-row>
+</ion-content>

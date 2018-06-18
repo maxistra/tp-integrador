@@ -1,0 +1,146 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle *ngIf="!registro">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Perfil</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <div >
+    <ion-grid align-items-center *ngFor="let i of perfil">
+        <ion-row>
+          <div text-center>
+              <ion-col align-self-center>
+                <ion-row>
+                  <ion-col>
+                    <ion-thumbnail>
+                      <img [src]="i.imagen"> 
+                    </ion-thumbnail>
+                    <div *ngIf="paraEditar">
+                      <ion-fab top right>
+                        <button ion-fab (click)="sacarFoto()" >
+                          <ion-icon name="camera"></ion-icon>
+                        </button>
+                      </ion-fab>
+                    </div>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-label *ngIf="!paraEditar">
+                        <h1>{{i.user}}</h1>
+                    </ion-label>
+                    <div *ngIf="paraEditar" text-center>
+                      <ion-item item-content>
+                        <ion-label floating>
+                          <h1>{{i.user}}</h1>
+                        </ion-label>
+                          <ion-input type="text" clearInput="true" [(ngModel)]="user"></ion-input>
+                      </ion-item>
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+          </div>
+        </ion-row>
+        <ion-row align-items-center>
+          <ion-col align-self-center col-4 offset>
+            <ion-label>Nombre Pila:</ion-label>
+          </ion-col>
+          <ion-col>
+            <div *ngIf="!paraEditar">
+                <ion-label>
+                  <h1>{{i.nombre}}</h1>
+                </ion-label>
+            </div>
+            <div *ngIf="paraEditar">
+              <ion-item>
+                <ion-label floating>{{i.nombre}}</ion-label>
+                <ion-input type="text" clearInput="true" [(ngModel)]="nombre"></ion-input>
+              </ion-item>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row align-items-center>
+            <ion-col align-self-center col-4 offset>
+                <ion-label>Apellido Pila:</ion-label>
+            </ion-col>
+            <ion-col>
+              <div *ngIf="!paraEditar">
+                  <ion-label>
+                    <h1>{{i.apellido}}</h1>
+                  </ion-label>
+              </div>
+              <div *ngIf="paraEditar">
+                <ion-item>
+                  <ion-label floating>{{i.apellido}}</ion-label>
+                  <ion-input type="text" clearInput="true" [(ngModel)]="apellido"></ion-input>
+                </ion-item>
+              </div>
+            </ion-col>
+        </ion-row>
+        <ion-row align-items-center>
+          <ion-col align-self-center col-4 offset>
+              <ion-label>Correo Electronico:</ion-label>
+          </ion-col>
+          <ion-col>
+            <div *ngIf="!paraEditar">
+                <ion-label>
+                  <h1>{{i.correo}}</h1>
+                </ion-label>
+            </div>
+            <div *ngIf="paraEditar">
+              <ion-item>
+                <ion-label floating>{{i.correo}}</ion-label>
+                <ion-input type="text" clearInput="true" [(ngModel)]="correo"></ion-input>
+              </ion-item>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col align-self-center col-4 offset>
+            <ion-item>
+              <ion-label>Mantenme actualizado todo el tiempo</ion-label>
+              <ion-checkbox [(ngModel)]="estaActivo" (ionChange)="Guardar()" ></ion-checkbox>
+            </ion-item>
+          </ion-col>
+          <ion-col align-self-center col-4 offset>
+            <ion-item>
+              <ion-label>Fecha de Nacimiento</ion-label>
+              <ion-datetime displayFormat="DD/MM/YY" doneText="Ok" [(ngModel)]="cumpleFeliz" (ionChange)="verFechas()"></ion-datetime>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+    </ion-grid>  
+  </div>  
+</ion-content>
+
+
+<ion-footer no-border no-lines>
+  <div text-center>
+      <ion-row align-items-center align-items-stretch>
+          <ion-col align-self-center>
+            <div *ngIf="!paraEditar">
+                <button ion-button icon-only rounde (click)="Editar()">
+                    <ion-icon name="create"></ion-icon>
+                </button>
+            </div>
+            <div *ngIf="paraEditar">
+                <button ion-button icon-only rounde (click)="Guardar()">
+                    <ion-icon name="lock"></ion-icon>
+                </button>
+            </div>
+            <div *ngIf="registro">
+                <button ion-button rounde (click)="Contrasena()">
+                    <ion-label>Generar acceso</ion-label>
+                    <ion-icon name="contacts"></ion-icon>
+                </button>
+            </div>
+          </ion-col>
+        </ion-row>
+  </div>
+</ion-footer>

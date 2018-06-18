@@ -1,18 +1,54 @@
 <ion-header>
+
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Home</ion-title>
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+    <ion-title>Listado de Peliculas</ion-title>
   </ion-navbar>
+
 </ion-header>
 
+
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
-
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <h1>Listado de Peliculas obtenidas</h1>
+  <ion-row>
+    <ion-col col-3 right>
+      <ion-label>¿Que vemos hoy?</ion-label>
+    </ion-col>
+    <ion-col offset>
+      <ion-searchbar [(ngModel)]="name" debounce="500" (ionInput)="buscarPelicula()" placeholder="Busca aquí"></ion-searchbar>
+    </ion-col>
+  </ion-row>
+  <div *ngIf="name !=''">
+      <ion-list>
+          <ion-item *ngFor="let i of listaPeliculas">
+              <ion-card>
+                <ion-card-header (click)="info(i.Title,i.Poster)">
+                    <h2>{{i.Title | uppercase}}</h2>
+                    <img [src]="i.Poster">
+                </ion-card-header>
+                <ion-card-content>
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col >
+                      <p>Año: {{i.Year}}</p>
+                      <p>Tipo: {{i.Type}}</p>
+                      <p>imdbID: {{i.imdbID}}</p>
+                      </ion-col>
+                      <ion-col >
+                          <button ion-button icon-only (click)="anadeFavoritos(i.Title,i.Poster,i.Year,i.Type,i.imdbID)">
+                              <ion-icon name="star"></ion-icon>
+                          </button>
+                          <button ion-button icon-only>
+                              <ion-icon name="share" (click)="compartir(i.imdbID)"></ion-icon>
+                          </button>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-card-content>
+              </ion-card>
+            </ion-item>
+        </ion-list>
+</div>
 </ion-content>

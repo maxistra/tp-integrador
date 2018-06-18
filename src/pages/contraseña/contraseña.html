@@ -1,0 +1,31 @@
+<ion-content padding center class="main-view">
+  <div class="overlay">
+    <div text-center class="modal_content" *ngIf="recuperoContrasena">
+      <h2>Recuperar Contraseña</h2>
+      <ion-item>
+        <ion-label flex>Usuario</ion-label>
+        <ion-input type="text" clearInput="true" aria-placeholder [(ngModel)]="user" ></ion-input>
+      </ion-item>
+    </div>
+    <div text-center class="modal_content" *ngIf="!recuperoContrasena">
+      <h2>Generar una Contraseña</h2>
+        <ion-item>
+          <ion-label fixed>Contraseña</ion-label>
+          <ion-input type="password" aria-placeholder [(ngModel)]="contrasena" ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>Repetir Contraseña</ion-label>
+          <ion-input type="password" aria-placeholder [(ngModel)]="rContrasena"></ion-input>
+        </ion-item>
+    </div>
+    <button ion-button round icon-left (click)="enviarContrasena()" *ngIf="recuperoContrasena" >
+      <ion-icon name="key"></ion-icon>
+    </button>
+    <button ion-button round icon-left (click)="generarContrasena()" *ngIf="!recuperoContrasena" >
+       <ion-icon name="key"></ion-icon>
+     </button>
+    <button ion-button round icon-left (click)="Salir(false)" >
+        <ion-icon name="exit"></ion-icon>
+    </button>
+  </div>
+</ion-content>
